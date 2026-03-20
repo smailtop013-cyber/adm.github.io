@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<title>Дулат & Аружан</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Montserrat;background:#000;color:white;overflow:hidden}
+
+/* OPEN SCREEN */
+.open-screen{
+position:fixed;width:100%;height:100%;
+background:#000;display:flex;
+flex-direction:column;justify-content:center;align-items:center;
+z-index:9999;text-align:center;
+}
+.open-screen h2{font-family:"Cormorant Garamond";font-size:40px;margin-bottom:30px}
+.open-btn{
+padding:15px 40px;border:1px solid #c6a86b;
+background:transparent;color:#c6a86b;cursor:pointer;transition:.3s;
+}
+.open-btn:hover{background:#c6a86b;color:white}
+
+/* HERO */
+.hero{
+height:100vh;display:flex;flex-direction:column;
+justify-content:center;align-items:center;text-align:center;
+position:relative;overflow:hidden;
+}
+.hero img{
+position:absolute;width:100%;height:100%;
+object-fit:cover;top:0;left:0;z-index:-2;
+transform:scale(1.1);transition:transform 6s ease;
+}
+.hero::after{
+content:"";position:absolute;width:100%;height:100%;
+background:rgba(0,0,0,0.45);z-index:-1;
+}
+.hero h1{
+font-family:"Cormorant Garamond";
+font-size:80px;font-weight:400;letter-spacing:3px;
+}
+.hero p{margin-top:15px;letter-spacing:2px}
+
+/* COUNTDOWN */
+.countdown{margin-top:40px;font-size:18px;letter-spacing:2px;}
+.timer{display:flex;gap:25px;margin-top:15px;justify-content:center;}
+.timer div{text-align:center}
+.timer span{
+font-size:32px;font-family:"Cormorant Garamond";display:block;
+}
+
+/* SECTION */
+.section{padding:120px 20px;text-align:center;}
+.container{max-width:700px;margin:auto;}
+.title{font-family:"Cormorant Garamond";font-size:48px;margin-bottom:20px;}
+.gold-line{width:80px;height:2px;background:#c6a86b;margin:20px auto 40px;}
+.text{line-height:1.8;}
+
+/* BUTTON */
+.map-btn{
+display:inline-block;margin-top:30px;
+padding:15px 40px;border:1px solid #c6a86b;
+color:#c6a86b;text-decoration:none;transition:.3s;
+}
+.map-btn:hover{background:#c6a86b;color:white}
+</style>
+</head>
+
+<body>
+
+<!-- OPEN SCREEN -->
+<div class="open-screen" id="openScreen">
+<h2>Үйлену тойға шақыру</h2>
+<button class="open-btn" onclick="openInvite()">Ашу</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<img src="https://optim.tildacdn.ink/tild3838-3232-4563-b934-333738383161/-/format/webp/3.jpg.webp" id="heroImg">
+<h1>Дулат & Аружан</h1>
+<p>26 СӘУІР 2026 • ТАРАЗ</p>
+
+<div class="countdown">
+Тойға дейін қалды:
+<div class="timer">
+<div><span id="days">0</span>Күн</div>
+<div><span id="hours">0</span>Сағат</div>
+<div><span id="minutes">0</span>Минут</div>
+<div><span id="seconds">0</span>Секунд</div>
+</div>
+</div>
+</section>
+
+<!-- MUSIC (iPhone OK) -->
+<audio id="music" loop playsinline preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openInvite(){
+  document.getElementById("openScreen").style.display="none";
+  document.body.style.overflow="auto";
+  document.getElementById("heroImg").style.transform="scale(1)";
+
+  // 🔥 iPhone FIX
+  const music = document.getElementById("music");
+  music.play().catch(() => {
+    document.body.addEventListener('click', () => music.play(), {once:true});
+  });
+}
+
+/* COUNTDOWN */
+var weddingDate = new Date("April 26, 2026 17:00:00").getTime();
+setInterval(function(){
+var now = new Date().getTime();
+var d = weddingDate - now;
+
+document.getElementById("days").innerHTML = Math.floor(d/(1000*60*60*24));
+document.getElementById("hours").innerHTML = Math.floor((d%(1000*60*60*24))/(1000*60*60));
+document.getElementById("minutes").innerHTML = Math.floor((d%(1000*60*60))/(1000*60));
+document.getElementById("seconds").innerHTML = Math.floor((d%(1000*60))/1000);
+},1000);
+</script>
+
+</body>
+</html>
